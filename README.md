@@ -1,8 +1,8 @@
 # VBA_Creer_Image
-Permet de passer en revue l'ensemble des graphiques d'un classeur pour en générer les images.
+Permet de créer une image à partir d'un graphique présent sur un onglet
 
 ##Lien vers le site
-http://customoffice.github.io/VBA_Graph_In_Picture/
+http://customoffice.github.io/VBA_Creer_Image/
 
 ## Instruction
 - Soit créer un module dans votre projet vba et y copier/coller le code ci-dessous
