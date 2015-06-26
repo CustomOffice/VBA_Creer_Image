@@ -23,7 +23,6 @@ http://customoffice.github.io/VBA_Creer_Image/
 '!!!vous voulez utiliser le chemin en relatif, il faut forcé l'argument chemin_realtif à true       !!!
 '!!!- par défaut le type d'image est png, vous pouvez spécifier jpg ou gif aussi                    !!!
 '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 Sub creer_image(nom_graph As String, nom_feuille As String, Optional chemin As String = "", Optional chemin_relatif As Boolean = False, Optional type_image As String = "png")
     'déclaration des variables
     Dim test_creation_image As Boolean
