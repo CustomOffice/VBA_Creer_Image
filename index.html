@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Vba creer image : Permet de créer une image à partir d&#39;un graphique présent sur un onglet">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Vba creer image</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/CustomOffice/VBA_Creer_Image">View on GitHub</a>
+
+          <h1 id="project_title">Vba creer image</h1>
+          <h2 id="project_tagline">Permet de créer une image à partir d&#39;un graphique présent sur un onglet</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/CustomOffice/VBA_Creer_Image/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/CustomOffice/VBA_Creer_Image/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="vba_creer_image" class="anchor" href="#vba_creer_image" aria-hidden="true"><span class="octicon octicon-link"></span></a>VBA_Creer_Image</h1>
+
+<p>Permet de créer une image à partir d'un graphique présent sur un onglet      </p>
+
+<h2>
+<a id="instruction" class="anchor" href="#instruction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Instruction</h2>
+
+<ul>
+<li>Soit créer un module dans votre projet vba et y copier/coller le code ci-dessous</li>
+<li>Soit télécharger le module (fichier *.bas) et l'inserer dans votre projet vba</li>
+</ul>
+
+<h2>
+<a id="code" class="anchor" href="#code" aria-hidden="true"><span class="octicon octicon-link"></span></a>Code</h2>
+
+<div class="highlight highlight-bash"><pre><span class="pl-s"><span class="pl-pds">'</span>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>
+<span class="pl-s"><span class="pl-pds">'</span></span><span class="pl-k">!!!</span>TITRE <span class="pl-c1">:</span> Génère une image à partir d<span class="pl-s"><span class="pl-pds">'</span>un graphique                                                !!!</span>
+<span class="pl-s"><span class="pl-pds">'</span></span><span class="pl-k">!!!</span>DATE <span class="pl-c1">:</span>  17.04.15                                                                                <span class="pl-k">!!!</span>
+<span class="pl-s"><span class="pl-pds">'</span>!!!                                                                                                !!!</span>
+<span class="pl-s"><span class="pl-pds">'</span></span><span class="pl-k">!!!</span>DESCRIPTION <span class="pl-c1">:</span> Permet de créer une image à partir d<span class="pl-s"><span class="pl-pds">'</span>un graphique présent sur un onglet            !!!</span>
+<span class="pl-s"><span class="pl-pds">'</span></span><span class="pl-k">!!!</span>                                                                                                <span class="pl-k">!!!</span>
+<span class="pl-s"><span class="pl-pds">'</span>!!!REGLES :                                                                                        !!!</span>
+<span class="pl-s"><span class="pl-pds">'</span></span><span class="pl-k">!!!</span>- utilise le nom du graphique, le nom de l<span class="pl-s"><span class="pl-pds">'</span>onglet                                               !!!</span>
+<span class="pl-s"><span class="pl-pds">'</span></span><span class="pl-k">!!!</span>- le chemin par défaut pour l<span class="pl-s"><span class="pl-pds">'</span>enregistrement de l<span class="pl-pds">'</span></span>image est l<span class="pl-s"><span class="pl-pds">'</span>emplacement du fichier excel      !!!</span>
+<span class="pl-s"><span class="pl-pds">'</span></span><span class="pl-k">!!!</span>- si un chemin est spécifié, par défaut il est en absolu, c<span class="pl-s"><span class="pl-pds">'</span>est à dire, le chemin complet, si   !!!</span>
+<span class="pl-s"><span class="pl-pds">'</span></span><span class="pl-k">!!!</span>vous voulez utiliser le chemin en relatif, il faut forcé l<span class="pl-s"><span class="pl-pds">'</span>argument chemin_realtif à true       !!!</span>
+<span class="pl-s"><span class="pl-pds">'</span></span><span class="pl-k">!!!</span>- par défaut le <span class="pl-c1">type</span> d<span class="pl-s"><span class="pl-pds">'</span>image est png, vous pouvez spécifier jpg ou gif aussi                    !!!</span>
+<span class="pl-s"><span class="pl-pds">'</span></span><span class="pl-k">!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>
+
+Sub creer_image(nom_graph As String, nom_feuille As String, Optional chemin As String = <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>, Optional chemin_relatif As Boolean = False, Optional type_image As String = <span class="pl-s"><span class="pl-pds">"</span>png<span class="pl-pds">"</span></span>)
+    <span class="pl-s"><span class="pl-pds">'</span>déclaration des variables</span>
+<span class="pl-s">    Dim test_creation_image As Boolean</span>
+<span class="pl-s">    Dim taille As Integer</span>
+<span class="pl-s"></span>
+<span class="pl-s">    <span class="pl-pds">'</span></span>génère le chemin
+    If chemin = <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span> Then
+        chemin_graph = ThisWorkbook.Path <span class="pl-k">&amp;</span> Application.PathSeparator <span class="pl-k">&amp;</span> nom_graph <span class="pl-k">&amp;</span> <span class="pl-s"><span class="pl-pds">"</span>.<span class="pl-pds">"</span></span> <span class="pl-k">&amp;</span> type_image
+    Else
+        If chemin_relatif = False Then
+            chemin_graph = chemin <span class="pl-k">&amp;</span> Application.PathSeparator <span class="pl-k">&amp;</span> nom_graph <span class="pl-k">&amp;</span> <span class="pl-s"><span class="pl-pds">"</span>.<span class="pl-pds">"</span></span> <span class="pl-k">&amp;</span> type_image
+        Else
+            chemin_graph = ThisWorkbook.Path <span class="pl-k">&amp;</span> Application.PathSeparator <span class="pl-k">&amp;</span> chemin <span class="pl-k">&amp;</span> Application.PathSeparator <span class="pl-k">&amp;</span> nom_graph <span class="pl-k">&amp;</span> <span class="pl-s"><span class="pl-pds">"</span>.<span class="pl-pds">"</span></span> <span class="pl-k">&amp;</span> type_image
+        End If
+    End If
+
+    test_creation_image = False <span class="pl-s"><span class="pl-pds">'</span>quelque fois l<span class="pl-pds">'</span></span>enregistrement bug (pas trouvé pourquoi) cette variable permet de reboucler la création de l<span class="pl-s"><span class="pl-pds">'</span>image jusqu<span class="pl-pds">'</span></span>à son bon fonctionnement
+    Do Until test_creation_image = True
+        Worksheets(nom_feuille).Select
+        ActiveWindow.Zoom = 100 <span class="pl-s"><span class="pl-pds">'</span>fige le zoom car influence la taille de l<span class="pl-pds">'</span></span>image à l<span class="pl-s"><span class="pl-pds">'</span>enregistrement</span>
+<span class="pl-s">        Worksheets(nom_feuille).ChartObjects(nom_graph).Chart.Export _</span>
+<span class="pl-s">            Filename:=chemin_graph, FilterName:=type_image</span>
+<span class="pl-s">        taille = FileLen(chemin_graph)</span>
+<span class="pl-s">        If taille &lt; 100 Then</span>
+<span class="pl-s">            test_creation_image = False</span>
+<span class="pl-s">            Worksheets(nom_feuille).ChartObjects(nom_graph).Select</span>
+<span class="pl-s">        Else</span>
+<span class="pl-s">            test_creation_image = True</span>
+<span class="pl-s">        End If</span>
+<span class="pl-s">    Loop</span>
+<span class="pl-s">End Sub</span></pre></div>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Vba creer image maintained by <a href="https://github.com/CustomOffice">CustomOffice</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
